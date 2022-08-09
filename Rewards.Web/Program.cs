@@ -15,7 +15,7 @@ namespace Rewards.Web
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(options => options.SupportNonNullableReferenceTypes());
 
             var cf = builder.Configuration.GetSection(CsvConnectionOptions.SectionName).Get<CsvConnectionOptions>();
             builder.Services.AddSingleton(cf);

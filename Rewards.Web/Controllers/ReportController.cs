@@ -19,7 +19,7 @@ namespace Rewards.Web.Controllers
 
         [HttpPost()]
         [Route("ByCustomerAndMonth")]
-        public IEnumerable<object> ByCustomerAndMonth(ByCustomerAndMonthParameters parameters)
+        public IEnumerable<RewardByCustomerAndMonthResult> ByCustomerAndMonth(ByCustomerAndMonthParameters parameters)
         {
             var startDate = parameters.StartDate;
             var endDate = startDate.AddMonths(3);
