@@ -23,7 +23,7 @@ To start application run the following command from the root of the repo:
 dotnet run --project Rewards.Web
 ```
 
-You will see a message which containы information about the used port:
+You will see a message which contains information about the used port:
 
 ```text
 Now listening on: http://localhost:5285
@@ -78,4 +78,67 @@ To stop and remove container run this command:
 ```bash
 #!/bin/bash
 docker stop rewards-app && docker rm rewards-app
+```
+
+To delete docker image run this command:
+
+```bash
+#!/bin/bash
+docker rmi rewards
+```
+
+## Dataset
+
+The list of transactions is stored in `Rewards.Web\data\csv\transactions.csv` csv file.
+It contains transactions for 2 customers with ids `100` and `200`.
+For each customer there are 3 transactions per month for 4 months.
+The `/Report/ByCustomerAndMonth` REST method generates a report that contains rewards aggregated by customer and month for 3-month period (the start date of period is passed as a parameter to the method).
+Additionally, the report contains a total of rewards for 3-month period for each customer.
+Here is a sample result for POST request `{ "startDate": "2022-01-01T00:00:00Z" }`:
+
+```json
+[
+  {
+    "customerId": 100,
+    "periods": [
+      {
+        "periodName": "2022-01",
+        "rewardPoints": 80
+      },
+      {
+        "periodName": "2022-02",
+        "rewardPoints": 110
+      },
+      {
+        "periodName": "2022-03",
+        "rewardPoints": 150
+      },
+      {
+        "periodName": "Total",
+        "rewardPoints": 340
+      }
+    ]
+  },
+  {
+    "customerId": 200,
+    "periods": [
+      {
+        "periodName": "2022-01",
+        "rewardPoints": 65
+      },
+      {
+        "periodName": "2022-02",
+        "rewardPoints": 95
+      },
+      {
+        "periodName": "2022-03",
+        "rewardPoints": 125
+      },
+      {
+        "periodName": "Total",
+        "rewardPoints": 285
+      }
+    ]
+  }
+]
 ```
