@@ -7,6 +7,21 @@
 * .NET 6 - To build application locally without using Docker you will need .NET 6 SDK: <https://dotnet.microsoft.com/en-us/download/dotnet/6.0>
 * Docker - to build a docker image you will need a docker installed (in this case you don't need to have .NET 6 SDK locally): <https://docs.docker.com/engine/install/>
 
+## Run tests
+
+To to run tests run the following command from the root of the repo:
+
+```bash
+#!/bin/bash
+dotnet test
+```
+
+## Configuration
+
+Application configuration settings are stored in `appsettings.json` and `appsettings.Development.json` files.
+The 1st file contains baseline configuration and the 2nd one optionally contains overridden values for `Development` configuration profile (no separate `Release` profile is created).
+Currently the configuration files contain configuration for logging (LogLevel) and configuration for `csv` data location.
+
 ## Local build
 
 To build application with .NET SDK run the following command from the root of the repo:
@@ -87,7 +102,13 @@ To delete docker image run this command:
 docker rmi rewards
 ```
 
+## Health checking
+
+Application provides http `GET` endpoint for health checking. Its url is `/healthcheck`.
+
 ## Dataset
+
+![Dataset image](docs/dataset.png)
 
 The list of transactions is stored in `Rewards.Web\data\csv\transactions.csv` csv file.
 It contains transactions for 2 customers with ids `100` and `200`.
